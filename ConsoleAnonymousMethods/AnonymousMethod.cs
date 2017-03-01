@@ -10,6 +10,7 @@ namespace ConsoleAnonymousMethods
     //delegaten kan pege på en metode som returnerer en int og som har en int parameter
     delegate int delInt1par(int x);
     delegate bool delBool1par(int x);
+    delegate int delInt2par(int x, int y);
 
     class AnonymousMethod
     {
@@ -27,6 +28,11 @@ namespace ConsoleAnonymousMethods
             Console.WriteLine($"delgtrThan100 : {delgrtThan100(10)}");
             Console.WriteLine($"delgtrThan100 : {delgrtThan100(105)}");
 
+            delInt2par delGange = gange;
+
+            Console.WriteLine($"delGange : {delGange(2, 5)}");
+            Console.WriteLine($"delGange : {delGange(2, 2)}");
+
             //kalder metoden kvadrat gennem delegaten delKvadrat
             Console.WriteLine($"delKvadrat : {delKvadrat(2)}"); 
 
@@ -36,15 +42,25 @@ namespace ConsoleAnonymousMethods
             {
                 return x*x;
             };
-            Console.WriteLine("delkvadrat : " + delKvadratAnonym (2));
+            Console.WriteLine("delkvadratAnonym : " + delKvadratAnonym (2));
 
             delBool1par delgrtThan100Anonym = delegate(int x)
             {
                 return x > 100; 
             };
 
-            Console.WriteLine($"delgrtThan100 : {delgrtThan100Anonym(10)}");
-            Console.WriteLine($"delgrtThan100 : {delgrtThan100Anonym(105)}");
+            Console.WriteLine($"delgrtThan100Anonym : {delgrtThan100Anonym(10)}");
+            Console.WriteLine($"delgrtThan100Anonym : {delgrtThan100Anonym(105)}");
+
+            delInt2par delGangeAnonym = delegate (int x, int y)
+            {
+                return x * y;
+            };
+
+            Console.WriteLine($"delGangeAnonym : {delGangeAnonym(2, 5)}");
+            Console.WriteLine($"delGangeAnonym : {delGangeAnonym(2, 2)}");
+
+
             //anonym metode skrevet via Lamda syntax og som tildeles delegaten
             //delKvadratLamda
             delInt1par delKvadratLamda = x => x*x; //x => x*x er min anonyme metode. 
@@ -53,6 +69,11 @@ namespace ConsoleAnonymousMethods
             delBool1par delgrtThan100Lambda = x => x > 100;
             Console.WriteLine($"delgrtThan100 lambde : {delgrtThan100Lambda(10)}");
             Console.WriteLine($"delgrtThan100 lambde : {delgrtThan100Lambda(105)}");
+
+            delInt2par delGangeLambda = (x,y) => x * y;
+
+            Console.WriteLine($"delGangeLambda : {delGangeLambda(2,5)}");
+            Console.WriteLine($"delGangeLambda : {delGangeLambda(2, 2)}");
 
 
             //Istedet for at bruge min egen delegate delInt1par kan jeg bruge
@@ -63,6 +84,10 @@ namespace ConsoleAnonymousMethods
             Func<int, bool> funcDelegateGrtThan100 = x => x > 100;
             Console.WriteLine($"funcDelegate grt than 100: {funcDelegateGrtThan100(10)}");
             Console.WriteLine($"funcDelegate grt than 100: {funcDelegateGrtThan100(105)}");
+
+            Func<int,int,int> funcDelegateGange = (x,y) => x* y;
+            Console.WriteLine($"funcDelegate: {funcDelegateGange(2,5)} ");
+            Console.WriteLine($"funcDelegate: {funcDelegateGange(2,2)} ");
 
 
             //Her skal du selv arbejde med delegates, anonyme metoder og Lamda udtryk
